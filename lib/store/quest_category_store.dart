@@ -10,14 +10,13 @@ abstract class _QuestCategoryStore with Store {
       : categories = categories ?? ObservableList<QuestCategory>();
 
   final ObservableList<QuestCategory> categories;
+  ReactionDisposer _disposeSaveReaction;
 
   @observable
   ObservableFuture<void> loader;
 
-  ReactionDisposer _disposeSaveReaction;
-
-  @computed
-  List<QuestCategory> get visibleCategories => categories.toList(growable: false);
+@computed
+  List<QuestCategory> get allCategories => categories.toList(growable: false);
 
   @action
   Future<void> _loadCategories() async {
@@ -37,3 +36,5 @@ abstract class _QuestCategoryStore with Store {
     await loader;
   }
 }
+
+enum VisibilityFilter { all, pending, completed }
