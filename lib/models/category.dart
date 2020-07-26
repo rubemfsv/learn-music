@@ -1,6 +1,8 @@
 import 'package:mobx/mobx.dart';
 import 'package:uuid/uuid.dart';
 
+part 'category_store.g.dart';
+
 class Category = _Category with _$Category;
 
 abstract class _Category with Store {
