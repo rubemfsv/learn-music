@@ -1,13 +1,13 @@
 import 'package:mobx/mobx.dart';
 import 'package:uuid/uuid.dart';
 
-part 'category_store.g.dart';
+part 'quest_category.g.dart';
 
-class Category = _Category with _$Category;
+class QuestCategory = _QuestCategory with _$QuestCategory;
 
-abstract class _Category with Store {
-  _Category({String id, this.description = ''})
-      : id = id ?? Uuid().generateV4();
+abstract class _QuestCategory with Store {
+  _QuestCategory({String id, this.description = ''})
+      : id = id ?? Uuid().v4();
 
   final String id;
 
@@ -16,13 +16,13 @@ abstract class _Category with Store {
 
   @override
   String toString() {
-    return '_Category{id: $id, description: $description}';
+    return '_QuestCategory{id: $id, description: $description}';
   }
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is _Category &&
+      other is _QuestCategory &&
           runtimeType == other.runtimeType &&
           id == other.id &&
           description == other.description;
