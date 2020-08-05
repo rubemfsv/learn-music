@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mobx/mobx.dart';
 import 'package:learntech/models/quest_category.dart';
 
@@ -9,7 +10,7 @@ abstract class _QuestCategoryStore with Store {
   _QuestCategoryStore({
     ObservableList<QuestCategory> categories,
     this.filter = VisibilityFilter.all,
-    }) : categories = categories ?? ObservableList<QuestCategory>();
+  }) : categories = categories ?? ObservableList<QuestCategory>();
 
   final ObservableList<QuestCategory> categories;
   ReactionDisposer _disposeSaveReaction;
@@ -25,20 +26,25 @@ abstract class _QuestCategoryStore with Store {
 
   @action
   Future<void> _loadCategories() async {
-    final entities = [
-      QuestCategory(description: "Fundamentos da Teoria Musical"),
-      QuestCategory(description: "Desenvolvendo a Musicalidade"),
-      QuestCategory(
-          description:
-              "Musicalidade: Gráficos de acordes, acordes diatônicos e teclas secundárias"),
-      QuestCategory(
-          description:
-              "Musicalidade: Tensões, Função Harmônica e Intercâmbio Modal"),
-      QuestCategory(description: "Fundamentos de Piano"),
-      QuestCategory(description: "Fundamentos de Baixo"),
-      QuestCategory(description: "Fundamentos de Violão"),
-      QuestCategory(description: "Fundamentos de Percussão")
-    ];
+    categories.clear();
+    Firestore.instance.collection('categories').snapshots().listen((data) =>
+        data.documents.forEach((doc) =>
+            categories.add(QuestCategory(description: doc["description"]))));
+
+    // final entities = [
+    //   QuestCategory(description: "Fundamentos da Teoria Musical"),
+    //   QuestCategory(description: "Desenvolvendo a Musicalidade"),
+    //   QuestCategory(
+    //       description:
+    //           "Musicalidade: Gráficos de acordes, acordes diatônicos e teclas secundárias"),
+    //   QuestCategory(
+    //       description:
+    //           "Musicalidade: Tensões, Função Harmônica e Intercâmbio Modal"),
+    //   QuestCategory(description: "Fundamentos de Piano"),
+    //   QuestCategory(description: "Fundamentos de Baixo"),
+    //   QuestCategory(description: "Fundamentos de Violão"),
+    //   QuestCategory(description: "Fundamentos de Percussão")
+    // ];
 
     categories.addAll(entities.toList());
   }

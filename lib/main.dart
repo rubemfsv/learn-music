@@ -3,6 +3,8 @@ import 'package:learntech/home/home_screen.dart';
 import 'package:learntech/store/quest_category_store.dart';
 import 'package:provider/provider.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -10,20 +12,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider<QuestCategoryStore>(
-      create: (_) {
-        final store = QuestCategoryStore();
-        store.init();
-        return store;
-      },
-      // dispose: (_, store) => store.dispose(),
-      child: MaterialApp(
-        initialRoute: "/",
-        routes: {
-          "/": (context) => const HomeScreen(),
-        },
-      ),
-    );
+    return FutureBuilder(
+        future: Firebase.initializeApp(),
+        builder: (context, snapshot) {
+          return Provider<QuestCategoryStore>(
+            create: (_) {
+              final store = QuestCategoryStore();
+              store.init();
+              return store;
+            },
+            // dispose: (_, store) => store.dispose(),
+            child: MaterialApp(
+              initialRoute: "/",
+              routes: {
+                "/": (context) => const HomeScreen(),
+              },
+            ),
+          );
+        }
+       );
   }
 }
 
