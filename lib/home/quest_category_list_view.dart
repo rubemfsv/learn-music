@@ -4,7 +4,8 @@ import 'package:learntech/store/quest_category_store.dart';
 import 'package:provider/provider.dart';
 
 class QuestCategoryListView extends StatelessWidget {
-
+  QuestCategoryListView() : super();
+  
   @override
   Widget build(BuildContext context) {
     return Observer(
@@ -19,7 +20,7 @@ class QuestCategoryListView extends StatelessWidget {
 
             return ListTile(
               title: Observer(
-                builder: (context) => Text(category.description,),
+                builder: (context) => Text(category.description),
               ),
             );
           },
