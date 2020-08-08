@@ -25,7 +25,7 @@ abstract class _QuestLevelStore with Store {
   @computed
   List<QuestLevel> get allLevels => levels.toList(growable: false);
 
-  // TODO remove this function when implementing multiple levels screens
+    // TODO remove this function when implementing multiple levels screen
   @computed
   QuestLevel get basicLevel =>
       levels.firstWhere((element) => element.id == 'basic');

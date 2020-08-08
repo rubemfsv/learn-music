@@ -16,6 +16,13 @@ mixin _$QuestLevelStore on _QuestLevelStore, Store {
       (_$allLevelsComputed ??= Computed<List<QuestLevel>>(() => super.allLevels,
               name: '_QuestLevelStore.allLevels'))
           .value;
+  Computed<QuestLevel> _$basicLevelComputed;
+
+  @override
+  QuestLevel get basicLevel =>
+      (_$basicLevelComputed ??= Computed<QuestLevel>(() => super.basicLevel,
+              name: '_QuestLevelStore.basicLevel'))
+          .value;
 
   final _$filterAtom = Atom(name: '_QuestLevelStore.filter');
 
@@ -59,7 +66,8 @@ mixin _$QuestLevelStore on _QuestLevelStore, Store {
     return '''
 filter: ${filter},
 loader: ${loader},
-allLevels: ${allLevels}
+allLevels: ${allLevels},
+basicLevel: ${basicLevel}
     ''';
   }
 }
