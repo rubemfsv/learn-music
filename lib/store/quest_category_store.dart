@@ -27,26 +27,20 @@ abstract class _QuestCategoryStore with Store {
   @action
   Future<void> _loadCategories() async {
     categories.clear();
-    Firestore.instance.collection('categories').snapshots().listen((data) =>
-        data.documents.forEach((doc) =>
-            categories.add(QuestCategory(description: doc["description"]))));
+    Firestore.instance
+        .collection('categories')
+        .getDocuments()
+        .then((value) => (event) {
+              if (event.documents.isNotEmpty()) {
+                event.documents.forEach((doc) => categories
+                    .add(QuestCategory(description: doc["description"])));
+              }
+            })
+        .catchError((err) => print("Error fetching data: $err"));
 
-    // final entities = [
-    //   QuestCategory(description: "Fundamentos da Teoria Musical"),
-    //   QuestCategory(description: "Desenvolvendo a Musicalidade"),
-    //   QuestCategory(
-    //       description:
-    //           "Musicalidade: Gráficos de acordes, acordes diatônicos e teclas secundárias"),
-    //   QuestCategory(
-    //       description:
-    //           "Musicalidade: Tensões, Função Harmônica e Intercâmbio Modal"),
-    //   QuestCategory(description: "Fundamentos de Piano"),
-    //   QuestCategory(description: "Fundamentos de Baixo"),
-    //   QuestCategory(description: "Fundamentos de Violão"),
-    //   QuestCategory(description: "Fundamentos de Percussão")
-    // ];
-
-    categories.addAll(entities.toList());
+    // Firestore.instance.collection('categories').snapshots().listen((data) =>
+    //     data.documents.forEach((doc) =>
+    //         categories.add(QuestCategory(description: doc["description"]))));
   }
 
   Future<void> init() async {
