@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'quest_category_store.dart';
+part of 'quest_level_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,16 +8,16 @@ part of 'quest_category_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$QuestCategoryStore on _QuestCategoryStore, Store {
-  Computed<List<QuestCategory>> _$allCategoriesComputed;
+mixin _$QuestLevelStore on _QuestLevelStore, Store {
+  Computed<List<QuestLevel>> _$allLevelsComputed;
 
   @override
-  List<QuestCategory> get allCategories => (_$allCategoriesComputed ??=
-          Computed<List<QuestCategory>>(() => super.allCategories,
-              name: '_QuestCategoryStore.allCategories'))
-      .value;
+  List<QuestLevel> get allLevels =>
+      (_$allLevelsComputed ??= Computed<List<QuestLevel>>(() => super.allLevels,
+              name: '_QuestLevelStore.allLevels'))
+          .value;
 
-  final _$filterAtom = Atom(name: '_QuestCategoryStore.filter');
+  final _$filterAtom = Atom(name: '_QuestLevelStore.filter');
 
   @override
   VisibilityFilter get filter {
@@ -32,7 +32,7 @@ mixin _$QuestCategoryStore on _QuestCategoryStore, Store {
     });
   }
 
-  final _$loaderAtom = Atom(name: '_QuestCategoryStore.loader');
+  final _$loaderAtom = Atom(name: '_QuestLevelStore.loader');
 
   @override
   ObservableFuture<void> get loader {
@@ -47,12 +47,11 @@ mixin _$QuestCategoryStore on _QuestCategoryStore, Store {
     });
   }
 
-  final _$_loadCategoriesAsyncAction =
-      AsyncAction('_QuestCategoryStore._loadCategories');
+  final _$_loadLevelsAsyncAction = AsyncAction('_QuestLevelStore._loadLevels');
 
   @override
-  Future<void> _loadCategories() {
-    return _$_loadCategoriesAsyncAction.run(() => super._loadCategories());
+  Future<void> _loadLevels(QuestCategory category) {
+    return _$_loadLevelsAsyncAction.run(() => super._loadLevels(category));
   }
 
   @override
@@ -60,7 +59,7 @@ mixin _$QuestCategoryStore on _QuestCategoryStore, Store {
     return '''
 filter: ${filter},
 loader: ${loader},
-allCategories: ${allCategories}
+allLevels: ${allLevels}
     ''';
   }
 }

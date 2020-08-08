@@ -12,7 +12,7 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> { 
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,13 +22,13 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Observer(builder: (context) {
         final store = Provider.of<QuestCategoryStore>(context);
 
-        if(store.loader.status == FutureStatus.pending) {
-           return Center(
+        if (store.loader.status == FutureStatus.pending) {
+          return Center(
             child: CircularProgressIndicator(),
           );
         }
         return QuestCategoryListView();
-      })
+      }),
     );
   }
 }

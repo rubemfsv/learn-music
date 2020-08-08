@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 class QuestCategoryListView extends StatelessWidget {
   QuestCategoryListView() : super();
-  
+
   @override
   Widget build(BuildContext context) {
     return Observer(
@@ -25,7 +25,7 @@ class QuestCategoryListView extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (_) {
-                      return QuestScreen();
+                      return QuestScreen(category);
                     },
                   ),
                 );

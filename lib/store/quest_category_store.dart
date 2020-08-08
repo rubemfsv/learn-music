@@ -12,7 +12,7 @@ abstract class _QuestCategoryStore with Store {
     this.filter = VisibilityFilter.all,
   }) : categories = categories ?? ObservableList<QuestCategory>();
 
-  final ObservableList<QuestCategory> categories;
+   final ObservableList<QuestCategory> categories;
   ReactionDisposer _disposeSaveReaction;
 
   @observable
@@ -24,23 +24,16 @@ abstract class _QuestCategoryStore with Store {
   @computed
   List<QuestCategory> get allCategories => categories.toList(growable: false);
 
-  @action
+   @action
   Future<void> _loadCategories() async {
     categories.clear();
-    Firestore.instance
-        .collection('categories')
-        .getDocuments()
-        .then((value) => (event) {
-              if (event.documents.isNotEmpty()) {
-                event.documents.forEach((doc) => categories
-                    .add(QuestCategory(description: doc["description"])));
-              }
-            })
-        .catchError((err) => print("Error fetching data: $err"));
 
-    // Firestore.instance.collection('categories').snapshots().listen((data) =>
-    //     data.documents.forEach((doc) =>
-    //         categories.add(QuestCategory(description: doc["description"]))));
+    Firestore.instance.collection('categories').getDocuments().then((event) {
+      if (event.documents.isNotEmpty) {
+        event.documents.forEach((doc) => categories.add(QuestCategory(
+            id: doc.documentID, description: doc["description"])));
+      }
+    }).catchError((e) => print("error fetching data: $e"));
   }
 
   Future<void> init() async {
@@ -48,6 +41,7 @@ abstract class _QuestCategoryStore with Store {
 
     await loader;
   }
+  void dispose() => _disposeSaveReaction();
 }
 
 enum VisibilityFilter { all, pending, completed }
